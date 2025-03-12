@@ -32,35 +32,54 @@
             border-radius: 10px;
             text-align: center;
             width: 250px;
+            cursor: pointer;
         }
-        img {
+        .art-piece img {
             width: 100%;
             border-radius: 10px;
         }
-        audio {
+        .highlighted {
             position: fixed;
-            bottom: 10px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .hidden {
+            display: none;
+        }
+        .back-button {
+            display: none;
+            position: fixed;
+            top: 10px;
             left: 10px;
-            width: 300px;
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <h1>Welcome to Prasad's Art Gallery</h1>
     <p id="welcomeMessage"></p>
+    <button class="back-button" onclick="showGallery()">Back to Gallery</button>
     <div class="gallery-container">
         <div class="gallery" id="gallery">
             <!-- Images will be dynamically added here -->
         </div>
     </div>
-    <audio controls autoplay loop>
+    <audio id="background-music" autoplay loop>
         <source src="background-music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <script>
         document.getElementById('welcomeMessage').innerText = 'Hello, ' + (localStorage.getItem('username') || 'Guest') + '! Enjoy the artwork!';
 
-        // List of image URLs (you need to upload your images to GitHub and update the paths)
         const images = [
             'art1.jpg',
             'art2.jpg',
@@ -71,9 +90,24 @@
         images.forEach(image => {
             let artDiv = document.createElement('div');
             artDiv.className = 'art-piece';
-            artDiv.innerHTML = `<img src="${image}" alt="Artwork"><p>Description of the artwork</p>`;
+            artDiv.innerHTML = `<img src="${image}" alt="Artwork" onclick="highlightImage(this)"><p>Description of the artwork</p>`;
             gallery.appendChild(artDiv);
         });
+
+        function highlightImage(img) {
+            document.querySelectorAll('.art-piece').forEach(el => el.classList.add('hidden'));
+            img.parentElement.classList.remove('hidden');
+            img.parentElement.classList.add('highlighted');
+            document.querySelector('.back-button').style.display = 'block';
+        }
+
+        function showGallery() {
+            document.querySelectorAll('.art-piece').forEach(el => {
+                el.classList.remove('hidden');
+                el.classList.remove('highlighted');
+            });
+            document.querySelector('.back-button').style.display = 'none';
+        }
     </script>
 </body>
 </html>
