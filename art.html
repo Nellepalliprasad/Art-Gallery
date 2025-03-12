@@ -81,8 +81,8 @@
         function login() {
             const user = document.getElementById('username').value;
             if (user) {
-                alert('Welcome, ' + user + '! Enjoy the gallery.');
-                // Redirect to gallery page (to be created later)
+                localStorage.setItem('username', user);
+                window.location.href = 'gallery.html';
             } else {
                 alert('Please enter your name to continue.');
             }
