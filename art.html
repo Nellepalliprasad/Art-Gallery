@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prasad's Art Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Adlam+Display&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Adlam Display', sans-serif;
+            background: url('project-art.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            padding: 20px;
+        }
+        .login-box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 100px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle 3s infinite;
+        }
+        .moon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: yellow;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="moon"></div>
+    <div class="container">
+        <div class="login-box">
+            <h2>Welcome to Prasad's Art Gallery</h2>
+            <p>Please login to explore the gallery</p>
+            <input type="text" placeholder="Enter your name" id="username">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+    <script>
+        function login() {
+            const user = document.getElementById('username').value;
+            if (user) {
+                alert('Welcome, ' + user + '! Enjoy the gallery.');
+                // Redirect to gallery page (to be created later)
+            } else {
+                alert('Please enter your name to continue.');
+            }
+        }
+
+        // Generate stars dynamically
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+    </script>
+</body>
+</html>
