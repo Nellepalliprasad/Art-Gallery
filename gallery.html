@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prasad's Art Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Adlam+Display&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Adlam Display', sans-serif;
+            background: url('project-art.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        .gallery-container {
+            padding: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+        .art-piece {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            width: 250px;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        audio {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Prasad's Art Gallery</h1>
+    <p id="welcomeMessage"></p>
+    <div class="gallery-container">
+        <div class="gallery" id="gallery">
+            <!-- Images will be dynamically added here -->
+        </div>
+    </div>
+    <audio controls autoplay loop>
+        <source src="background-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script>
+        document.getElementById('welcomeMessage').innerText = 'Hello, ' + (localStorage.getItem('username') || 'Guest') + '! Enjoy the artwork!';
+
+        // List of image URLs (you need to upload your images to GitHub and update the paths)
+        const images = [
+            'art1.jpg',
+            'art2.jpg',
+            'art3.jpg'
+        ];
+
+        const gallery = document.getElementById('gallery');
+        images.forEach(image => {
+            let artDiv = document.createElement('div');
+            artDiv.className = 'art-piece';
+            artDiv.innerHTML = `<img src="${image}" alt="Artwork"><p>Description of the artwork</p>`;
+            gallery.appendChild(artDiv);
+        });
+    </script>
+</body>
+</html>
